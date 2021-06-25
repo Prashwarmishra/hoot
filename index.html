@@ -6,7 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hoot | Home</title>
     <link rel="stylesheet" href="./css/home.css" />
-    <script src="./js/home.js"></script>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1>HOOT</h1>
+    </header>
+    <main id="main">
+      <div id="search-bar">
+        <input
+          type="text"
+          placeholder="Type to search movies..."
+          id="movie-search-input"
+        />
+      </div>
+      <div class="search-results">
+        <ul id="search-results-list"></ul>
+      </div>
+    </main>
+
+    <script src="./js/home.js"></script>
+  </body>
 </html>
