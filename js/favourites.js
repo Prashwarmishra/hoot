@@ -53,18 +53,31 @@ function updateResult(data) {
       </div>
       <div class="details-child button-group">
         <button class="movie-like-button favourite">Remove from Favourites</button>
-        <button><a href="#">View More</a></button>
+        <button class="view-details-button">View More</button>
       </div>
     </div>
   </div>
   `;
   myFavouritesList.appendChild(favouriteItem);
+
+  //add event listener to movie-like button
   const movieLikeButton = favouriteItem.querySelector(".movie-like-button");
-  // console.log(movieLikeButton);
   movieLikeButton.addEventListener("click", (e) => {
     e.preventDefault();
     toggleFavourites(favouriteItem);
   });
+
+  //add event listener to view-details button
+  const viewDetailsButton = favouriteItem.querySelector(".view-details-button");
+  viewDetailsButton.addEventListener("click", function () {
+    showMovieDetails(data.Title);
+  });
+}
+
+//function to redirect to movie-details page
+function showMovieDetails(title) {
+  const url = `movieDetails.html?title=${title}`;
+  window.open(url, "_blank");
 }
 
 //function to add/remove a movie to/from favourites

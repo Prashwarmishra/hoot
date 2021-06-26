@@ -51,7 +51,7 @@ function updateResult(movies) {
     const movieYear = document.createElement("p");
     const buttonGroup = document.createElement("div");
     const movieLikeButton = document.createElement("button");
-    const movieDetailsButton = document.createElement("a");
+    const movieDetailsButton = document.createElement("button");
 
     //check if the movie is already favourited
     const isFavourite = checkIfFavourite(movie.Title);
@@ -65,8 +65,7 @@ function updateResult(movies) {
     }
 
     movieDetailsButton.innerHTML = "View Details";
-    movieDetailsButton.href =
-      "file:///C:/Users/prash/Desktop/Projects/javascript/hoot/movieDetails.html/?name=hulk";
+
     movieTitle.innerHTML = movie.Title;
     movieYear.innerHTML = movie.Year;
     moviePoster.src = movie.Poster;
@@ -79,6 +78,11 @@ function updateResult(movies) {
       toggleFavourites(movieItem);
     });
 
+    //add event listener to movieDetailsButton
+    movieDetailsButton.addEventListener("click", function () {
+      showMovieDetails(movie.Title);
+    });
+
     movieItem.appendChild(movieTitle);
     movieItem.appendChild(movieYear);
     movieItem.appendChild(moviePoster);
@@ -89,6 +93,11 @@ function updateResult(movies) {
 
     searchResultsList.appendChild(movieItem);
   });
+}
+
+function showMovieDetails(title) {
+  const url = `movieDetails.html?title=${title}`;
+  window.open(url, "_blank");
 }
 
 //function to get the name of movie searched
