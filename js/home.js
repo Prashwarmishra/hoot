@@ -48,7 +48,10 @@ function updateResult(movies) {
     const movieItem = document.createElement("li");
     const movieTitle = document.createElement("h2");
     const moviePoster = document.createElement("img");
+    const movieYear = document.createElement("p");
+    const buttonGroup = document.createElement("div");
     const movieLikeButton = document.createElement("button");
+    const movieDetailsButton = document.createElement("button");
 
     //check if the movie is already favourited
     const isFavourite = checkIfFavourite(movie.Title);
@@ -61,7 +64,9 @@ function updateResult(movies) {
       movieLikeButton.innerText = "Add to Favourites";
     }
 
+    movieDetailsButton.innerHTML = "View Details";
     movieTitle.innerHTML = movie.Title;
+    movieYear.innerHTML = movie.Year;
     moviePoster.src = movie.Poster;
     moviePoster.alt = "movie-poster";
 
@@ -73,8 +78,12 @@ function updateResult(movies) {
     });
 
     movieItem.appendChild(movieTitle);
+    movieItem.appendChild(movieYear);
     movieItem.appendChild(moviePoster);
-    movieItem.appendChild(movieLikeButton);
+    movieItem.appendChild(buttonGroup);
+
+    buttonGroup.appendChild(movieLikeButton);
+    buttonGroup.appendChild(movieDetailsButton);
 
     searchResultsList.appendChild(movieItem);
   });
@@ -100,15 +109,16 @@ function toggleFavourites(movieItem) {
 
   //check if the class favourite is present
   const favourite = movieItem.querySelector(".favourite");
-  console.log("checking if favourited", favourite);
 
   //if favourite class is present, remove the movie from the favourites
   if (favourite) {
     movieLikeButton.classList.remove("favourite");
+    movieLikeButton.innerText = "Add to Favourites";
     removeFromFavourites(movieTitle);
   } else {
     //else, add the movie to the favourites list
     movieLikeButton.classList.add("favourite");
+    movieLikeButton.innerText = "Remove from Favourites";
     addToFavourites(movieTitle);
   }
 }
