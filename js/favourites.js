@@ -22,91 +22,47 @@ function fetchData(movie) {
 }
 
 function updateResult(data) {
-  console.log("data recieved: ", data);
-
   const favouriteItem = document.createElement("li");
-  const favouritePoster = document.createElement("img");
-  const detailsContainer = document.createElement("div");
-  const favouriteTitle = document.createElement("h2");
-  const infoContainer = document.createElement("div");
-  const ratingsContainer = document.createElement("div");
-  const runTime = document.createElement("div");
-  const runTimeIcon = document.createElement("i");
-  const runTimeText = document.createElement("span");
-  const parentalRating = document.createElement("div");
-  const parentalRatingIcon = document.createElement("i");
-  const parentalRatingText = document.createElement("span");
-  const imdbRating = document.createElement("div");
-  const imdbRatingLabel = document.createElement("span");
-  const imdbRatingValue = document.createElement("span");
-  const metaScore = document.createElement("div");
-  const metaScoreLabel = document.createElement("span");
-  const metaScoreValue = document.createElement("span");
-  const buttonGroup = document.createElement("div");
-  const movieLikeButton = document.createElement("button");
-  const movieDetailsButton = document.createElement("button");
+  favouriteItem.innerHTML = `
+    <img src="${data.Poster}" alt="movie-poster">
+    <div class="details-container">
+    <h2>${data.Title}</h2>
+    <div class="details-parent">
+      <div class="details-child">
+        <div class="info-section">
+          <div class="runtime">
+            <span><i class="far fa-hourglass"></i></span>
+            <span>${data.Runtime}</span>
+          </div>
+          <div class="parental-rating">
+            <span><i class="far fa-eye"></i></span>
+            <span>${data.Rated}</span>
+          </div>
+        </div>
 
-  favouritePoster.src = data.Poster;
-  favouritePoster.alt = "movie-poster";
-  favouriteTitle.innerHTML = data.Title;
-  runTimeIcon.classList.add("fas");
-  runTimeIcon.classList.add("fa-stopwatch");
-  runTimeText.innerHTML = data.Runtime;
-  // runTime.innerHTML = data.Runtime;
-  // <i class="far fa-eye"></i>
-  parentalRatingIcon.classList.add("far");
-  parentalRatingIcon.classList.add("fa-eye");
-  parentalRatingText.innerHTML = data.Rated;
-
-  imdbRatingLabel.innerHTML = "imdb";
-  imdbRatingValue.innerHTML = data.imdbRating;
-
-  metaScoreLabel.innerHTML = "Meta Score";
-  metaScoreValue.innerHTML = data.Metascore;
-
-  movieLikeButton.innerHTML = "Remove from Favourites";
-  movieLikeButton.classList.add("favourite");
-  movieDetailsButton.innerHTML = "View Details";
-
-  runTime.appendChild(runTimeIcon);
-  runTime.appendChild(runTimeText);
-
-  parentalRating.appendChild(parentalRatingIcon);
-  parentalRating.appendChild(parentalRatingText);
-
-  imdbRating.appendChild(imdbRatingLabel);
-  imdbRating.appendChild(imdbRatingValue);
-
-  metaScore.appendChild(metaScoreLabel);
-  metaScore.appendChild(metaScoreValue);
-
-  infoContainer.appendChild(runTime);
-  infoContainer.appendChild(parentalRating);
-  infoContainer.classList.add("info-container");
-
-  ratingsContainer.appendChild(imdbRating);
-  ratingsContainer.appendChild(metaScore);
-  ratingsContainer.classList.add("ratings-container");
-
-  buttonGroup.appendChild(movieLikeButton);
-  buttonGroup.appendChild(movieDetailsButton);
-  buttonGroup.classList.add("button-group");
-
-  detailsContainer.appendChild(favouriteTitle);
-  detailsContainer.appendChild(infoContainer);
-  detailsContainer.appendChild(ratingsContainer);
-  detailsContainer.appendChild(buttonGroup);
-  detailsContainer.classList.add("details-container");
-
-  favouriteItem.appendChild(favouritePoster);
-  favouriteItem.appendChild(detailsContainer);
-  favouriteItem.classList.add("movie-container");
+        <div class="rating-section">
+          <div class="imdb-rating">
+            <span>imdb</span>
+            <span>${data.imdbRating}</span>
+          </div>
+          <div class="metascore-rating">
+            <span>Meta Score</span>
+            <span>${data.Metascore}</span>
+          </div>
+        </div>
+      </div>
+      <div class="details-child button-group">
+        <button class="movie-like-button favourite">Remove from Favourites</button>
+        <button><a href="#">View More</a></button>
+      </div>
+    </div>
+  </div>
+  `;
   myFavouritesList.appendChild(favouriteItem);
-
-  //add event listener on movieLikeButton
+  const movieLikeButton = favouriteItem.querySelector(".movie-like-button");
+  // console.log(movieLikeButton);
   movieLikeButton.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log("toggling favourites");
     toggleFavourites(favouriteItem);
   });
 }
@@ -115,7 +71,6 @@ function updateResult(data) {
 function toggleFavourites(movieItem) {
   const movieLikeButton = movieItem.querySelector("button");
   const movieTitle = movieItem.querySelector("h2").innerHTML;
-  console.log("movie like button", movieItem);
 
   //check if the class favourite is present
   const favourite = movieItem.querySelector(".favourite");

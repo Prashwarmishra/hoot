@@ -51,7 +51,7 @@ function updateResult(movies) {
     const movieYear = document.createElement("p");
     const buttonGroup = document.createElement("div");
     const movieLikeButton = document.createElement("button");
-    const movieDetailsButton = document.createElement("button");
+    const movieDetailsButton = document.createElement("a");
 
     //check if the movie is already favourited
     const isFavourite = checkIfFavourite(movie.Title);
@@ -65,6 +65,8 @@ function updateResult(movies) {
     }
 
     movieDetailsButton.innerHTML = "View Details";
+    movieDetailsButton.href =
+      "file:///C:/Users/prash/Desktop/Projects/javascript/hoot/movieDetails.html/?name=hulk";
     movieTitle.innerHTML = movie.Title;
     movieYear.innerHTML = movie.Year;
     moviePoster.src = movie.Poster;
