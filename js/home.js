@@ -2,7 +2,7 @@
 const movieSearchInput = document.getElementById("movie-search-input");
 let movieSearchInterval;
 const searchResultsList = document.getElementById("search-results-list");
-let favouritesList = [];
+let favouritesList = fetchFavourites();
 
 /*-------------------------------------event-listeners-------------------------------------*/
 
@@ -12,6 +12,18 @@ window.onload = () => {
 };
 
 /*-------------------------------------function-declaration--------------------------------*/
+
+//function to fetch the favourites list
+function fetchFavourites() {
+  const favourites = localStorage.getItem("favouritesList").split(",") || [];
+  console.log("favourites: ", favourites);
+  return favourites;
+}
+
+//function to add the favourites list to localStorage
+function updateFavourites() {
+  localStorage.setItem("favouritesList", favouritesList);
+}
 
 //function to fetch the movie searched
 function fetchData(name) {
@@ -38,10 +50,20 @@ function updateResult(movies) {
     const moviePoster = document.createElement("img");
     const movieLikeButton = document.createElement("button");
 
+    //check if the movie is already favourited
+    const isFavourite = checkIfFavourite(movie.Title);
+
+    //if already favourited, add class favourite to the button and add appropriate text
+    if (isFavourite) {
+      movieLikeButton.classList.add("favourite");
+      movieLikeButton.innerText = "Remove from Favourites";
+    } else {
+      movieLikeButton.innerText = "Add to Favourites";
+    }
+
     movieTitle.innerHTML = movie.Title;
     moviePoster.src = movie.Poster;
     moviePoster.alt = "movie-poster";
-    movieLikeButton.innerText = "Add to Favourites";
 
     //add event listener on movieLikeButton
     movieLikeButton.addEventListener("click", (e) => {
@@ -70,34 +92,48 @@ function enableSearch() {
   };
 }
 
-//function to add a movie to favourites
+//function to add/remove a movie to/from favourites
 function toggleFavourites(movieItem) {
   const movieLikeButton = movieItem.querySelector("button");
   const movieTitle = movieItem.querySelector("h2").innerHTML;
   console.log("movie like button", movieItem);
+
+  //check if the class favourite is present
   const favourite = movieItem.querySelector(".favourite");
   console.log("checking if favourited", favourite);
 
+  //if favourite class is present, remove the movie from the favourites
   if (favourite) {
     movieLikeButton.classList.remove("favourite");
     removeFromFavourites(movieTitle);
   } else {
+    //else, add the movie to the favourites list
     movieLikeButton.classList.add("favourite");
     addToFavourites(movieTitle);
   }
-  //   console.log("toggled");
-  //   movieLikeButton.classList.toggle("favourite");
 }
 
 //function to add to favourites
 function addToFavourites(movieTitle) {
-  console.log("movieTitle", favouritesList);
+  //push the movie's title to the favourites array
   favouritesList.push(movieTitle);
   console.log("favourites-------->", favouritesList);
+  updateFavourites();
 }
 
 //function to remove from favourites
 function removeFromFavourites(movieTitle) {
+  //remove the movie's title from the favourites array
   favouritesList = favouritesList.filter((movie) => movie !== movieTitle);
   console.log("unfavourites-------->", favouritesList);
+  updateFavourites();
+}
+
+//function to check if a movie is favoueited
+function checkIfFavourite(movie) {
+  const index = favouritesList.indexOf(movie);
+  if (index != -1) {
+    return true;
+  }
+  return false;
 }
