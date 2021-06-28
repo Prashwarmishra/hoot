@@ -33,6 +33,7 @@ body header {
 body header .heading h1 {
   margin: 0;
   letter-spacing: 6px;
+  cursor: default;
 }
 
 body header .heading p {

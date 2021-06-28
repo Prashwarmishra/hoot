@@ -31,9 +31,19 @@ function updateResult(data) {
     <div class="wrapper-header">
         <img src="${data.Poster}" alt="movie-poster" />
         <div class="details-container">
-          <h2>${data.Title}</h2>
+          <h1>${data.Title}</h1>
           <div class="details-parent">
             <div class="details-child">
+              <div class="genre">
+                <h2>Genre</h2>
+                <p>${data.Genre}</p>
+              </div>
+              <div class="plot">
+                <h2>Plot</h2>
+                <p>${data.Plot}</p>
+              </div>
+            </div>
+            <div class="details-misc">
               <div class="info-section">
                 <div class="runtime">
                   <span><i class="far fa-hourglass"></i></span>
@@ -47,59 +57,44 @@ function updateResult(data) {
 
               <div class="rating-section">
                 <div class="imdb-rating">
-                  <span>imdb</span>
+                  <span>imdb:</span>
                   <span>${data.imdbRating}</span>
                 </div>
                 <div class="metascore-rating">
-                  <span>Meta Score</span>
+                  <span>Meta Score:</span>
                   <span>${data.Metascore}</span>
                 </div>
               </div>
-            </div>
-            <div class="details-child button-group">
-              <button class="movie-like-button favourite">
-                Remove from Favourites
-              </button>
-              <button class="view-details-button">View More</button>
             </div>
           </div>
         </div>
     </div>
 
-    <div class="wrapper-main">
-          <!-- add genre -->
-          <div class="genre">
-            <h2>Genre</h2>
+    <div class="wrapper-data">
+      <div class="box-office">
+        <h2>Box Office</h2>
+        <p>${data.BoxOffice}</p>
+      </div>
+      <div class="box-office">
+        <h2>Language</h2>
+        <p>${data.Language}</p>
+      </div>
+    </div>
 
-            ${data.Genre}
-          </div>
-          <div class="plot">
-            <h2>Plot</h2>
-            <p>${data.Plot}</p>
-          </div>
-        </div>
-
-        <div class="wrapper-data">
-          <div class="box-office">
-            <h2>Box Office</h2>
-            <p>${data.BoxOffice}</p>
-          </div>
-          <div class="box-office">
-            <h2>Language</h2>
-            <p>${data.Language}</p>
-          </div>
-        </div>
-
-        <div class="wrapper-footer">
-          <div class="actors">
-            <h2>Actors</h2>
-            <p>${data.Actors}</p>
-          </div>
-          <div class="box-office">
-            <h2>Director</h2>
-            <p>${data.Director}</p>
-          </div>
-        </div>
+    <div class="wrapper-footer">
+      <div class="actors">
+        <h2>Actors</h2>
+        <p>${data.Actors}</p>
+      </div>
+      <div class="director">
+        <h2>Director</h2>
+        <p>${data.Director}</p>
+      </div>
+      <div class="writers">
+        <h2>Writers</h2>
+        <p>${data.Writer}</p>
+      </div>
+    </div>
     `;
 
   console.log("/*/*/*/*/*/", main);

@@ -1,0 +1,48 @@
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background: #121212;
+  color: white;
+  padding: 1em;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  padding: 5em;
+  #page-main {
+    .wrapper {
+      .wrapper-header {
+        display: flex;
+        .details-container {
+          padding: 1em 2em;
+          h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-top: 0;
+            color: cornflowerblue;
+            letter-spacing: 3px;
+          }
+          p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+          }
+          .details-misc {
+            display: flex;
+            justify-content: space-evenly;
+          }
+          .details-misc > div {
+            padding: 1em;
+            div {
+              padding: 0.5em;
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+      .wrapper-footer {
+        p {
+          line-height: 1.8;
+        }
+      }
+    }
+  }
+}
