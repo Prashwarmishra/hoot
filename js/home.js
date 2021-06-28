@@ -15,8 +15,19 @@ window.onload = () => {
 
 //function to fetch the favourites list
 function fetchFavourites() {
-  const favourites = localStorage.getItem("favouritesList").split(",") || [];
+  const favourites = fetchFavourites();
   console.log("favourites: ", favourites);
+  return favourites;
+}
+
+//function to fetch the favourites
+function fetchFavourites() {
+  let favourites = localStorage.getItem("favouritesList");
+  if (favourites) {
+    favourites = favourites.split(",");
+  } else {
+    favourites = [];
+  }
   return favourites;
 }
 
