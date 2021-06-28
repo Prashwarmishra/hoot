@@ -88,6 +88,7 @@ function updateResult(movies) {
     movieItem.appendChild(moviePoster);
     movieItem.appendChild(buttonGroup);
 
+    buttonGroup.classList.add("button-group");
     buttonGroup.appendChild(movieLikeButton);
     buttonGroup.appendChild(movieDetailsButton);
 
